@@ -1,0 +1,242 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000001; };
+		00000002 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000002; };
+		00000003 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000003; };
+		00000004 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000004; };
+		00000005 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000005; };
+		00000006 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000006; };
+		00000007 /* TabSwitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000007; };
+		00000008 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10000008; };
+		00000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10000009; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		10000002 /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		10000003 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		10000004 /* TabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManager.swift; sourceTree = "<group>"; };
+		10000005 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
+		10000006 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
+		10000007 /* TabSwitcherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitcherViewController.swift; sourceTree = "<group>"; };
+		10000008 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		10000009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1000000B /* SimpleWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		20000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30000001 = {
+			isa = PBXGroup;
+			children = (
+				30000002 /* SimpleWeb */,
+				30000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30000002 /* SimpleWeb */ = {
+			isa = PBXGroup;
+			children = (
+				10000001 /* AppDelegate.swift */,
+				10000002 /* BrowserViewController.swift */,
+				10000003 /* Tab.swift */,
+				10000004 /* TabManager.swift */,
+				10000005 /* BookmarkManager.swift */,
+				10000006 /* BookmarksViewController.swift */,
+				10000007 /* TabSwitcherViewController.swift */,
+				10000008 /* LaunchScreen.storyboard */,
+				10000009 /* Assets.xcassets */,
+				1000000A /* Info.plist */,
+			);
+			path = SimpleWeb;
+			sourceTree = "<group>";
+		};
+		30000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1000000B /* SimpleWeb.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		40000001 /* SimpleWeb */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60000001;
+			buildPhases = (
+				50000001 /* Sources */,
+				20000001 /* Frameworks */,
+				50000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleWeb;
+			productName = SimpleWeb;
+			productReference = 1000000B;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		70000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 60000002;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 30000001;
+			productRefGroup = 30000003;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				40000001 /* SimpleWeb */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00000008 /* LaunchScreen.storyboard in Resources */,
+				00000009 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00000001 /* AppDelegate.swift in Sources */,
+				00000002 /* BrowserViewController.swift in Sources */,
+				00000003 /* Tab.swift in Sources */,
+				00000004 /* TabManager.swift in Sources */,
+				00000005 /* BookmarkManager.swift in Sources */,
+				00000006 /* BookmarksViewController.swift in Sources */,
+				00000007 /* TabSwitcherViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		80000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SimpleWeb/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.simpleweb;
+				PRODUCT_NAME = SimpleWeb;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		80000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SimpleWeb/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.simpleweb;
+				PRODUCT_NAME = SimpleWeb;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		80000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				OTHER_LDFLAGS = (
+				);
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		80000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				OTHER_LDFLAGS = (
+				);
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60000001 /* Build configuration list for PBXNativeTarget "SimpleWeb" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80000001 /* Debug */,
+				80000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60000002 /* Build configuration list for PBXProject "SimpleWeb" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80000003 /* Debug */,
+				80000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 70000001 /* Project object */;
+}
