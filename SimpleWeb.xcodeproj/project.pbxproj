@@ -14,7 +14,7 @@
 		00000005 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000005; };
 		00000006 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000006; };
 		00000007 /* TabSwitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000007; };
-		00000008 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10000008; };
+
 		00000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10000009; };
 /* End PBXBuildFile section */
 
@@ -26,7 +26,7 @@
 		10000005 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		10000006 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		10000007 /* TabSwitcherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitcherViewController.swift; sourceTree = "<group>"; };
-		10000008 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+
 		10000009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1000000B /* SimpleWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +61,7 @@
 				10000005 /* BookmarkManager.swift */,
 				10000006 /* BookmarksViewController.swift */,
 				10000007 /* TabSwitcherViewController.swift */,
-				10000008 /* LaunchScreen.storyboard */,
+
 				10000009 /* Assets.xcassets */,
 				1000000A /* Info.plist */,
 			);
@@ -129,7 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00000008 /* LaunchScreen.storyboard in Resources */,
+
 				00000009 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
