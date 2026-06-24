@@ -5,7 +5,7 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - xcodebuild -project SimpleWeb.xcodeproj -target SimpleWeb -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - xcodebuild -project SimpleWeb.xcodeproj -target SimpleWeb -sdk iphonesimulator -configuration Debug build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO 2>&1
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
     publishing:
