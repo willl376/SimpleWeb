@@ -64,7 +64,7 @@ class BrowserViewController: UIViewController {
         view.addSubview(topToolbar)
 
         NSLayoutConstraint.activate([
-            topToolbar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topToolbar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
             topToolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topToolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topToolbar.heightAnchor.constraint(equalToConstant: 44)
@@ -93,7 +93,7 @@ class BrowserViewController: UIViewController {
         view.addSubview(bottomToolbar)
 
         NSLayoutConstraint.activate([
-            bottomToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomToolbar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomToolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomToolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomToolbar.heightAnchor.constraint(equalToConstant: 44)
@@ -158,7 +158,8 @@ class BrowserViewController: UIViewController {
         guard let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
         UIView.animate(withDuration: duration) {
-            self.bottomToolbar.transform = CGAffineTransform(translationX: 0, y: -kbFrame.height + self.view.safeAreaInsets.bottom)
+            let bottomInset: CGFloat = 0
+            self.bottomToolbar.transform = CGAffineTransform(translationX: 0, y: -kbFrame.height + bottomInset)
         }
     }
 
