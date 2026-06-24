@@ -5,9 +5,17 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - xcodebuild -project SimpleWeb.xcodeproj -target SimpleWeb -sdk iphonesimulator -configuration Debug build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO 2>&1
+      - name: Build for device (unsigned)
+        script: |
+          xcodebuild -project SimpleWeb.xcodeproj -target SimpleWeb -sdk iphoneos -configuration Debug SYMROOT=build build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO 2>&1
+      - name: Package .ipa
+        script: |
+          mkdir -p Payload
+          cp -R build/Debug-iphoneos/SimpleWeb.app Payload/
+          zip -r SimpleWeb.ipa Payload/
     artifacts:
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - build/Debug-iphoneos/*.app
+      - SimpleWeb.ipa
     publishing:
       email:
         recipients:
