@@ -8,6 +8,7 @@ class BrowserViewController: UIViewController {
     private let bottomToolbar = UIToolbar()
     private let urlTextField = UITextField()
     private let tabManager = TabManager.shared
+    private let errorLabel = UILabel()
 
     private var backButton: UIBarButtonItem!
     private var forwardButton: UIBarButtonItem!
@@ -21,9 +22,11 @@ class BrowserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupErrorLabel()
         setupTopToolbar()
         setupBottomToolbar()
         setupWebViewContainer()
+        setupKeyboardDismiss()
         addInitialTab()
     }
 
@@ -36,6 +39,23 @@ class BrowserViewController: UIViewController {
     }
 
     // MARK: - Setup
+
+    private func setupErrorLabel() {
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.textAlignment = .center
+        errorLabel.numberOfLines = 0
+        errorLabel.textColor = .gray
+        errorLabel.font = UIFont.systemFont(ofSize: 16)
+        errorLabel.isHidden = true
+        view.addSubview(errorLabel)
+
+        NSLayoutConstraint.activate([
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            errorLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 40),
+            errorLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -40)
+        ])
+    }
 
     private func setupTopToolbar() {
         topToolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -79,32 +99,19 @@ class BrowserViewController: UIViewController {
             bottomToolbar.heightAnchor.constraint(equalToConstant: 44)
         ])
 
-        backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
-                                     style: .plain, target: self,
-                                     action: #selector(goBack))
+        backButton = UIBarButtonItem(title: "\u{25C0}", style: .plain, target: self, action: #selector(goBack))
         backButton.isEnabled = false
 
-        forwardButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"),
-                                        style: .plain, target: self,
-                                        action: #selector(goForward))
+        forwardButton = UIBarButtonItem(title: "\u{25B6}", style: .plain, target: self, action: #selector(goForward))
         forwardButton.isEnabled = false
 
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh,
-                                            target: self,
-                                            action: #selector(refreshPage))
-        let flex = UIBarButtonItem(flexibleSpace: true, target: nil, action: nil)
-        let bookmarksButton = UIBarButtonItem(barButtonSystemItem: .bookmarks,
-                                              target: self,
-                                              action: #selector(showBookmarks))
-        let newTabButton = UIBarButtonItem(barButtonSystemItem: .add,
-                                           target: self,
-                                           action: #selector(addNewTab))
-        tabCountLabel = UIBarButtonItem(title: "1", style: .plain,
-                                        target: self, action: #selector(showTabSwitcher))
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshPage))
+        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let bookmarksButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showBookmarks))
+        let newTabButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTab))
+        tabCountLabel = UIBarButtonItem(title: "1", style: .plain, target: self, action: #selector(showTabSwitcher))
 
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
-                                          target: self,
-                                          action: #selector(sharePage))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharePage))
 
         bottomToolbar.items = [
             backButton, forwardButton, refreshButton, flex,
@@ -124,6 +131,15 @@ class BrowserViewController: UIViewController {
             webViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             webViewContainer.bottomAnchor.constraint(equalTo: bottomToolbar.topAnchor)
         ])
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        webViewContainer.addGestureRecognizer(tap)
+    }
+
+    private func setupKeyboardDismiss() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     private func addInitialTab() {
@@ -132,10 +148,32 @@ class BrowserViewController: UIViewController {
         attachCurrentWebView()
     }
 
+    // MARK: - Keyboard
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let kbFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
+        UIView.animate(withDuration: duration) {
+            self.bottomToolbar.transform = CGAffineTransform(translationX: 0, y: -kbFrame.height + self.view.safeAreaInsets.bottom)
+        }
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
+        UIView.animate(withDuration: duration) {
+            self.bottomToolbar.transform = .identity
+        }
+    }
+
     // MARK: - WebView Management
 
     private func attachCurrentWebView() {
         webViewContainer.subviews.forEach { $0.removeFromSuperview() }
+        errorLabel.isHidden = true
         guard let wv = currentWebView else { return }
         wv.translatesAutoresizingMaskIntoConstraints = false
         wv.navigationDelegate = self
@@ -218,6 +256,7 @@ class BrowserViewController: UIViewController {
         currentWebView?.load(request)
         urlTextField.text = url.absoluteString
         urlTextField.resignFirstResponder()
+        errorLabel.isHidden = true
     }
 
     private func navigateToURL(_ text: String) {
@@ -226,13 +265,21 @@ class BrowserViewController: UIViewController {
         if urlString.isEmpty { return }
 
         if !urlString.contains(".") || urlString.contains(" ") {
-            urlString = "https://www.google.com/search?q=" + urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            urlString = "https://www.google.com/search?q=\(encoded)"
         } else if !urlString.hasPrefix("http://") && !urlString.hasPrefix("https://") {
             urlString = "https://" + urlString
         }
 
         guard let url = URL(string: urlString) else { return }
         loadURL(url)
+    }
+
+    private func showError(_ message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
+        webViewContainer.subviews.forEach { $0.removeFromSuperview() }
+        webViewContainer.addSubview(errorLabel)
     }
 }
 
@@ -266,20 +313,12 @@ extension BrowserViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         if (error as NSError).code != NSURLErrorCancelled {
-            let alert = UIAlertController(title: "Error",
-                                          message: error.localizedDescription,
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
+            showError(error.localizedDescription)
         }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        let alert = UIAlertController(title: "Load Failed",
-                                      message: error.localizedDescription,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        showError("Could not load page.\n\(error.localizedDescription)")
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

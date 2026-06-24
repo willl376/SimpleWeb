@@ -9,6 +9,7 @@ class BookmarksViewController: UITableViewController {
         super.viewDidLoad()
         title = "Bookmarks"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.estimatedRowHeight = 52
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
@@ -63,12 +64,16 @@ class BookmarksViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        if cell == nil {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        }
         let bookmark = manager.bookmarks[indexPath.row]
-        cell.textLabel?.text = bookmark.title
-        cell.detailTextLabel?.text = bookmark.url
-        cell.accessoryType = .disclosureIndicator
-        return cell
+        cell!.textLabel?.text = bookmark.title
+        cell!.detailTextLabel?.text = bookmark.url
+        cell!.detailTextLabel?.textColor = .gray
+        cell!.accessoryType = .disclosureIndicator
+        return cell!
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

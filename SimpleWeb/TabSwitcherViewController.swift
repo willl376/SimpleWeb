@@ -98,7 +98,7 @@ class TabCell: UICollectionViewCell {
         didSet {
             backgroundColor = isCurrent ? UIColor(white: 0.85, alpha: 1.0) : .white
             layer.borderWidth = isCurrent ? 2 : 0.5
-            layer.borderColor = isCurrent ? UIColor.systemBlue.cgColor : UIColor.lightGray.cgColor
+            layer.borderColor = isCurrent ? UIColor(red: 0, green: 0.48, blue: 1, alpha: 1).cgColor : UIColor.lightGray.cgColor
         }
     }
 
