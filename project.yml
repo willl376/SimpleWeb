@@ -3,13 +3,15 @@ options:
   bundleIdPrefix: com.example
   deploymentTarget:
     iOS: "10.0"
-  xcodeVersion: "16.0"
+  xcodeVersion: "15.0"
+  generateSchemes:
+    SimpleWeb:
+      parallelizeBuild: true
 
 settings:
   base:
     SWIFT_VERSION: "5.0"
     TARGETED_DEVICE_FAMILY: "2"
-    INFOPLIST_FILE: SimpleWeb/Info.plist
 
 targets:
   SimpleWeb:

@@ -7,7 +7,8 @@ workflows:
     scripts:
       - brew install xcodegen
       - cd $CM_BUILD_DIR && xcodegen generate
-      - xcodebuild -project SimpleWeb.xcodeproj -scheme SimpleWeb -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - cd $CM_BUILD_DIR && xcodebuild -list -project SimpleWeb.xcodeproj
+      - cd $CM_BUILD_DIR && xcodebuild -project SimpleWeb.xcodeproj -scheme SimpleWeb -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
     artifacts:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
     publishing:
